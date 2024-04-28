@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BrandSchema = new Schema({
-  name: { type: string, required: true, minLength: 3, maxLenght: 40 },
+  name: { type: String, required: true, minLength: 3, maxLenght: 40 },
 });
 
 BrandSchema.virtual("url").get(function () {
