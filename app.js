@@ -15,7 +15,7 @@ mongoose.set("strictQuery", false);
 
 main().catch((err) => console.log(err));
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL);
+  await mongoose.connect(process.env.MONGODB_URI);
   console.log("connected to database");
 }
 
