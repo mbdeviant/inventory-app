@@ -20,7 +20,11 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(database);
   console.log("connection established");
-  // make your final checks and call your generating functions here
+  await createCategories();
+  await createBrands();
+  await createProducts();
+  console.log("database generated, connection shutdown");
+  mongoose.connection.close();
 }
 
 async function createCategoryModel(name, description) {
@@ -40,10 +44,10 @@ async function createBrandModel(name) {
 async function createProductModel(
   name,
   description,
-  //   category,
+  category,
   price,
-  quantity
-  //   brand
+  quantity,
+  brand
 ) {
   productDetails = {
     name: name,
