@@ -5,6 +5,7 @@ const userArgs = process.argv.slice(2);
 const Brand = require("./models/brand");
 const Category = require("./models/category");
 const Product = require("./models/product");
+require("dotenv").config();
 
 const brands = [];
 const categories = [];
@@ -13,33 +14,33 @@ const products = [];
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
-const database = process.env.MONGODB_URI;
+// const database = process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(database);
+  await mongoose.connect(process.env.MONGODB_URI);
   console.log("connection established");
-  await createCategories();
-  await createBrands();
+  // await createCategories();
+  // await createBrands();
   await createProducts();
   console.log("database generated, connection shutdown");
   mongoose.connection.close();
 }
 
-async function createCategoryModel(name, description) {
-  const category = new Category({ name: name, description: description });
-  await category.save();
-  categories.push(category);
-  console.log(`created the ${name} category`);
-}
+// async function createCategoryModel(name, description) {
+//   const category = new Category({ name: name, description: description });
+//   await category.save();
+//   categories.push(category);
+//   console.log(`created the ${name} category`);
+// }
 
-async function createBrandModel(name) {
-  const brand = new Brand({ name: name });
-  await brand.save();
-  brands.push(brand);
-  console.log(`created the ${name} brand`);
-}
+// async function createBrandModel(name) {
+//   const brand = new Brand({ name: name });
+//   await brand.save();
+//   brands.push(brand);
+//   console.log(`created the ${name} brand`);
+// }
 
 async function createProductModel(
   name,
@@ -62,40 +63,40 @@ async function createProductModel(
   console.log(`created the  ${product} product`);
 }
 
-async function createCategories() {
-  console.log("categories being generated..");
-  await Promise.all([
-    createCategoryModel(
-      "Helmets",
-      "SHARP approved carbon-fiber maximum safety helmets"
-    ),
-    createCategoryModel(
-      "Jackets",
-      "With damage absorbing and durable chest, shoulder, elbow and back spine protectors."
-    ),
-    createCategoryModel(
-      "Gloves",
-      "Extended wrist protection for hardcore riding or comfortable standart hand protection for daily use."
-    ),
-    createCategoryModel("Pants", "For reinforced hip and kneecap protection."),
-    createCategoryModel(
-      "Boots",
-      "Protect your feet from unexpected situations."
-    ),
-  ]);
-}
+// async function createCategories() {
+//   console.log("categories being generated..");
+//   await Promise.all([
+//     createCategoryModel(
+//       "Helmets",
+//       "SHARP approved carbon-fiber maximum safety helmets"
+//     ),
+//     createCategoryModel(
+//       "Jackets",
+//       "With damage absorbing and durable chest, shoulder, elbow and back spine protectors."
+//     ),
+//     createCategoryModel(
+//       "Gloves",
+//       "Extended wrist protection for hardcore riding or comfortable standart hand protection for daily use."
+//     ),
+//     createCategoryModel("Pants", "For reinforced hip and kneecap protection."),
+//     createCategoryModel(
+//       "Boots",
+//       "Protect your feet from unexpected situations."
+//     ),
+//   ]);
+// }
 
-async function createBrands() {
-  console.log("brands being generated..");
-  await Promise.all([
-    createBrandModel("AGV"),
-    createBrandModel("Knox"),
-    createBrandModel("Arai"),
-    createBrandModel("Nolan"),
-    createBrandModel("Schubert"),
-    createBrandModel("Alpinestars"),
-  ]);
-}
+// async function createBrands() {
+//   console.log("brands being generated..");
+//   await Promise.all([
+//     createBrandModel("AGV"),
+//     createBrandModel("Knox"),
+//     createBrandModel("Arai"),
+//     createBrandModel("Nolan"),
+//     createBrandModel("Schubert"),
+//     createBrandModel("Alpinestars"),
+//   ]);
+// }
 
 async function createProducts() {
   console.log("generating products..");
@@ -104,106 +105,106 @@ async function createProducts() {
     createProductModel(
       "Protective Helmet",
       "Premium quality head safety gear",
-      categories[0],
+      "Helmets",
       120,
       7,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Arai"
     ),
     createProductModel(
       "Protective Helmet",
       "Head safety gear with decent protection",
-      categories[0],
+      "Helmets",
       90,
       23,
-      brands[Math.floor(Math.random() * brands.length)]
+      "AGV"
     ),
     createProductModel(
       "Protective Helmet",
       "Suitable for beginners",
-      categories[0],
+      "Helmets",
       50,
       54,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Nolan"
     ),
     createProductModel(
       "Protective Jacket",
       "Suitable for winter season. Heavy and warm.",
-      categories[1],
+      "Jackets",
       110,
       32,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Alpinstars"
     ),
     createProductModel(
       "Protective Jacket",
       "Summer friendly light jacket",
-      categories[1],
+      "Jackets",
       110,
       37,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Alpinestars"
     ),
     createProductModel(
       "Protective Jacket",
       "Four season jackets. Ready for everything.",
-      categories[1],
+      "Jackets",
       120,
       24,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Schubert"
     ),
     createProductModel(
       "Protective Glove",
       "Light and high-protection glove",
-      categories[2],
+      "Gloves",
       60,
       43,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Knox"
     ),
     createProductModel(
       "Protective Glove",
       "Full-size wrist protection glove",
-      categories[2],
+      "Gloves",
       90,
       52,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Knox"
     ),
     createProductModel(
       "Protective Pants",
       "Lightweight daily use pants",
-      categories[3],
+      "Pants",
       90,
       17,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Alpinestars"
     ),
     createProductModel(
       "Protective Pants",
       "Suitable for long and harsh roads. Heavy work pants.",
-      categories[3],
+      "Pants",
       120,
       58,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Schubert"
     ),
     createProductModel(
       "Protective Boots",
       "Light, sport but with protection",
-      categories[4],
+      "Boots",
       40,
       38,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Knox"
     ),
     createProductModel(
       "Protective Boots",
       "Heavier but stronger boots",
-      categories[4],
+      "Boots",
       50,
       27,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Knox"
     ),
     createProductModel(
       "Protective Boots",
       "Built for offroad cross adventures",
-      categories[4],
+      "Boots",
       80,
       77,
-      brands[Math.floor(Math.random() * brands.length)]
+      "Alpinestars"
     ),
   ]);
 }
