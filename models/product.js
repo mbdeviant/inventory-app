@@ -7,7 +7,7 @@ const ProductSchema = new Schema({
   description: { type: String, maxLenght: 250 },
   category: [{ type: Schema.Types.ObjectId, ref: "Category" }],
   price: Number,
-  number_of_items: Number,
+  quantity: Number,
   brand: [{ type: Schema.Types.ObjectId, ref: "Brand" }],
 });
 
