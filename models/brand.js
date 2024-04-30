@@ -11,4 +11,3 @@ BrandSchema.virtual("url").get(function () {
 });
 
 module.exports = mongoose.model("Brand", BrandSchema);
-0;
