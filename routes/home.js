@@ -8,6 +8,7 @@ const product_controller = require("../controllers/productController");
 router.get("/", product_controller.index);
 
 router.get("/products", product_controller.product_list);
+router.get("/product/:id", product_controller.product_detail);
 
 router.get("/brands", brand_controller.brand_list);
 
