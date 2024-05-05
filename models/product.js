@@ -8,12 +8,12 @@ const ProductSchema = new Schema({
   category: [{ type: Schema.Types.ObjectId, ref: "Category" }],
   price: Number,
   quantity: Number,
-  brand: [{ type: Schema.Types.ObjectId, ref: "Brand" }],
+  brand: { type: Schema.Types.ObjectId, ref: "Brand" },
 });
 
 // Virtual for product`s URL
 ProductSchema.virtual("url").get(function () {
-  return `/catalog/product/${this._id}`;
+  return `/home/product/${this._id}`;
 });
 
 module.exports = mongoose.model("Product", ProductSchema);
