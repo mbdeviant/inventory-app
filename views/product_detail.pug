@@ -1,0 +1,10 @@
+extends layout 
+
+block content
+  h1 #{product.name}
+
+  p #{product.description}
+  p #[Strong Brand:]
+        a(href=product.brand.url) #{product.brand.name}
+  p Price: $#{product.price}
+  p Quantity: #{product.quantity}
