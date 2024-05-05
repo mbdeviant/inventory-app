@@ -32,3 +32,30 @@ exports.product_list = asyncHandler(async (req, res, next) => {
     product_list: allProducts,
   });
 });
+
+exports.product_detail = asyncHandler(async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id)
+      .populate("brand")
+      .populate("category")
+      .exec();
+
+    if (!product) {
+      const err = new Error("product not found");
+      err.status = 404;
+      throw err;
+    }
+
+    console.log(
+      `product.brand: ${product.brand ? product.brand.name : "Brand not found"}`
+    );
+
+    res.render("product_detail", {
+      title: product.name,
+      product: product,
+    });
+  } catch (err) {
+    console.error("product not found", err);
+    next(err);
+  }
+});
