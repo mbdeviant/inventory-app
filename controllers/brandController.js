@@ -13,3 +13,29 @@ exports.brand_list = asyncHandler(async (req, res, next) => {
     brand_list: allBrands,
   });
 });
+
+exports.brand_detail = asyncHandler(async (req, res, next) => {
+  try {
+    const [brand, productsInBrand] = await Promise.all([
+      Brand.findById(req.params.id).exec(),
+      Product.find({ brand: req.params.id }, "name description").exec(),
+    ]);
+    console.log(brand, "brand");
+    console.log(productsInBrand, "productsInBrand");
+
+    if (!brand) {
+      const err = new Error("brand not found");
+      err.status = 404;
+      throw err;
+    }
+
+    res.render("brand_detail", {
+      title: brand.name,
+      brand: brand,
+      brand_products: productsInBrand,
+    });
+  } catch (err) {
+    console.error("product not found", err);
+    next(err);
+  }
+});
