@@ -46,10 +46,6 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
       throw err;
     }
 
-    console.log(
-      `product.brand: ${product.brand ? product.brand.name : "Brand not found"}`
-    );
-
     res.render("product_detail", {
       title: product.name,
       product: product,
