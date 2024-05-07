@@ -7,9 +7,8 @@ const CategorySchema = new Schema({
   description: { type: String, maxLenght: 250 },
 });
 
-// Virtual for category`s URL
 CategorySchema.virtual("url").get(function () {
-  return `/catalog/category/${this._id}`;
+  return `/home/category/${this._id}`;
 });
 
 module.exports = mongoose.model("Category", CategorySchema);
