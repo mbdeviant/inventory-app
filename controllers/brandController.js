@@ -20,8 +20,6 @@ exports.brand_detail = asyncHandler(async (req, res, next) => {
       Brand.findById(req.params.id).exec(),
       Product.find({ brand: req.params.id }, "name description").exec(),
     ]);
-    console.log(brand, "brand");
-    console.log(productsInBrand, "productsInBrand");
 
     if (!brand) {
       const err = new Error("brand not found");
