@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+  h1 #{title}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Products in category
+    if category_products.length
+      dl
+        each product in category_products
+          dt
+            a(href=product.url) #{product.name}
+          dd #{product.description}
+    else
+      p This category has no products.
