@@ -11,6 +11,8 @@ const homeRouter = require("./routes/home");
 require("dotenv").config();
 
 var app = express();
+const PORT = 3000;
+const IP = process.env.IP;
 
 mongoose.set("strictQuery", false);
 
@@ -49,5 +51,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+// app.listen(PORT, IP, () => {
+//   console.log("server running");
+// });
 
 module.exports = app;
