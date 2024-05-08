@@ -41,3 +41,34 @@ exports.brand_detail = asyncHandler(async (req, res, next) => {
 exports.brand_create_get = (req, res, next) => {
   res.render("brand_form", { title: "Create Brand" });
 };
+
+exports.brand_create_post = [
+  body("name", "Brand must contain at least 2 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const brand = new Brand({ name: req.body.name });
+
+    if (!errors.isEmpty()) {
+      res.render("brand_form", {
+        title: "Create Brand",
+        brand: brand,
+        errors: errors.array(),
+      });
+
+      return;
+    } else {
+      const brandExists = await Brand.findOne({ name: req.body.name }).exec();
+
+      if (brandExists) res.redirect(brandExists.id);
+      else {
+        await brand.save();
+        res.redirect(brand.id);
+      }
+    }
+  }),
+];
