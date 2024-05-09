@@ -55,7 +55,7 @@ exports.brand_create_post = [
 
     if (!errors.isEmpty()) {
       res.render("brand_form", {
-        title: "Create Brand",
+        title: "Add new Brand",
         brand: brand,
         errors: errors.array(),
       });
