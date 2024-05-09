@@ -39,7 +39,7 @@ exports.brand_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.brand_create_get = (req, res, next) => {
-  res.render("brand_form", { title: "Create Brand" });
+  res.render("brand_form", { title: "Add new brand" });
 };
 
 exports.brand_create_post = [
