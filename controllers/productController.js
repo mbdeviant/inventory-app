@@ -55,3 +55,19 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
     next(err);
   }
 });
+
+exports.product_create_get = asyncHandler(async (req, res, next) => {
+  const [allbrands, allCategories] = await Promise.all([
+    Brand.find().sort({ name: 1 }).exec(),
+    Category.find().sort({ name: 1 }).exec(),
+  ]);
+
+  console.log(allbrands);
+  console.log(allCategories);
+
+  res.render("product_form", {
+    title: "Add new product",
+    brands: allbrands,
+    categories: allCategories,
+  });
+});
