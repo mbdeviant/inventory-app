@@ -1,0 +1,43 @@
+extends layout 
+
+block content 
+    h1= title 
+    
+    form(method='POST')
+        div.form-group
+            label(for='name') Name: 
+            input#name.form-control(type='text', placeholder='Name or model of the product', name='name', required value=(undefined===product? '' : product.name))
+        div.form-group
+            label(for='description') Description: 
+            textarea#description.form-control(placeholder='Product description' name='description' required)= undefined===description ? '' : product.description
+        div.form-group
+            label(for='category') Category: 
+            select#category.form-control(name='category' required)
+                option(value='') -Select a category-
+                for category in categories 
+                    if product 
+                        if category._id.toString()===product.category._id.toString()
+                            option(value=category._id selected)  #{category.name}
+                        else 
+                            option(value=category._id) #{category.name}
+                    else 
+                        option(value=category._id) #{category.name}
+        div.form-group
+            label(for='price') Price:
+            input#price.form-control(type='text', placeholder='Product price' name='price' value=(undefined===product ? '' : product.price) required)
+        div.form-group
+            label(for='quantity') Quantity:
+            input#quantity.form-control(type='text', placeholder='Quantity number' name='quantity' value=(undefined===product ? '' : product.quantity) required)
+        div.form-group
+            label(for='brand') Brand: 
+            select#brand.form-control(name='brand' required)
+                option(value='') -Select a brand-
+                for brand in brands 
+                    if product 
+                        if brand._id.toString()===product.brand._id.toString()
+                            option(value=brand._id selected)  #{brand.name}
+                        else 
+                            option(value=brand._id) #{brand.name}
+                    else 
+                        option(value=brand._id) #{brand.name}
+        button.btn.btn-primary(type='submit') Submit
