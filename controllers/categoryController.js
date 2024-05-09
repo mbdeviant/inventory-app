@@ -24,8 +24,6 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
       Category.findById(req.params.id).exec(),
       Product.find({ category: req.params.id }, "name description").exec(),
     ]);
-    console.log(category, "category");
-    console.log(productsInCategory);
 
     if (!category) {
       const err = new Error("brand not found");
