@@ -106,14 +106,11 @@ exports.product_create_post = [
     });
 
     if (!errors.isEmpty()) {
-      console.log(errors.array());
-
       const [allBrands, allCategories] = await Promise.all([
         Brand.find().sort({ name: 1 }).exec(),
         Category.find().sort({ name: 1 }).exec(),
       ]);
 
-      console.log(product);
       res.render("product_form", {
         title: "Add new product",
         brands: allBrands,
