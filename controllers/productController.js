@@ -135,7 +135,6 @@ exports.product_update_get = asyncHandler(async (req, res, next) => {
     Brand.find().sort({ name: 1 }).exec(),
     Category.find().sort({ name: 1 }).exec(),
   ]);
-  console.log(product.description);
 
   if (product === null) {
     const err = new Error("Product not found");
