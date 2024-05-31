@@ -125,3 +125,28 @@ exports.product_create_post = [
     }
   }),
 ];
+
+exports.product_update_get = asyncHandler(async (req, res, next) => {
+  const [product, allBrands, allCategories] = await Promise.all([
+    Product.findById(req.params.id)
+      .populate("brand")
+      .populate("category")
+      .exec(),
+    Brand.find().sort({ name: 1 }).exec(),
+    Category.find().sort({ name: 1 }).exec(),
+  ]);
+  console.log(product.description);
+
+  if (product === null) {
+    const err = new Error("Product not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("product_form", {
+    title: "Update Product",
+    brands: allBrands,
+    categories: allCategories,
+    product: product,
+  });
+});
