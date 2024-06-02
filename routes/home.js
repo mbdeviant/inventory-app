@@ -11,6 +11,7 @@ router.get("/", product_controller.index);
 router.get("/product/create", product_controller.product_create_get);
 router.post("/product/create", product_controller.product_create_post);
 router.get("/product/:id/update", product_controller.product_update_get);
+router.post("/product/:id/update", product_controller.product_update_post);
 router.get("/product/:id", product_controller.product_detail);
 router.get("/products", product_controller.product_list);
 
