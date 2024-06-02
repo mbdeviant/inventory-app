@@ -149,3 +149,53 @@ exports.product_update_get = asyncHandler(async (req, res, next) => {
     product: product,
   });
 });
+
+exports.product_update_post = [
+  body("name", "Name cannot be empty.").trim().isLength({ min: 1 }).escape(),
+  body("description", "Description cannot be empty.")
+    .trim()
+    .isLength({ max: 250 })
+    .notEmpty()
+    .escape(),
+  body("category", "Category must be selected").not().isEmpty(),
+  body("price", "Price cannot be empty").trim().isFloat({ min: 0 }),
+  body("quantity", "Quantity cannot be empty").trim().isInt({ min: 0 }),
+  body("brand", "Brand must be selected").not().isEmpty(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const product = new Product({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      brand: req.body.brand,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      const [allBrands, allCategories] = await Promise.all([
+        Brand.find().sort({ name: 1 }).exec(),
+        Category.find().sort({ name: 1 }).exec(),
+      ]);
+
+      res.render("product_form", {
+        title: "Add new product",
+        brands: allBrands,
+        categories: allCategories,
+        product: product,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.id,
+        product,
+        {}
+      );
+      res.redirect(updatedProduct.url);
+    }
+  }),
+];
