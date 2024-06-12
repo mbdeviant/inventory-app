@@ -52,8 +52,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-// app.listen(PORT, IP, () => {
-//   console.log("server running");
-// });
+app.listen(PORT, IP, () => {
+  console.log("server running");
+});
 
 module.exports = app;
