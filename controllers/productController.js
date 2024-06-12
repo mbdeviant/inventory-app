@@ -199,3 +199,16 @@ exports.product_update_post = [
     }
   }),
 ];
+
+exports.product_delete_get = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id).exec();
+
+  if (product === null) {
+    res.redirect("/home/products");
+  }
+
+  res.render("product_delete", {
+    title: "Delete Product",
+    product: product,
+  });
+});
