@@ -212,3 +212,14 @@ exports.product_delete_get = asyncHandler(async (req, res, next) => {
     product: product,
   });
 });
+
+exports.product_delete_post = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id).exec();
+
+  if (product === null) {
+    res.redirect("/home/products");
+  } else {
+    await Product.findByIdAndDelete(req.body.productid);
+    res.redirect("/home/products");
+  }
+});
