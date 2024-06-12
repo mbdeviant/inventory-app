@@ -72,3 +72,12 @@ exports.brand_create_post = [
     }
   }),
 ];
+
+exports.brand_update_get = asyncHandler(async (req, res, next) => {
+  const brand = await Brand.findById(req.params.id).exec();
+
+  res.render("brand_form", {
+    title: "Update Brand",
+    brand: brand,
+  });
+});
