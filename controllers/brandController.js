@@ -111,3 +111,16 @@ exports.brand_update_post = [
     }
   }),
 ];
+
+exports.brand_delete_get = asyncHandler(async (req, res, next) => {
+  const brand = await Brand.findById(req.params.id).exec();
+
+  if (brand === null) {
+    res.redirect("/home/brands");
+  }
+
+  res.render("brand_delete", {
+    title: "Delete Brand",
+    brand: brand,
+  });
+});
