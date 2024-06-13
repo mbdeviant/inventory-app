@@ -113,7 +113,10 @@ exports.brand_update_post = [
 ];
 
 exports.brand_delete_get = asyncHandler(async (req, res, next) => {
-  const brand = await Brand.findById(req.params.id).exec();
+  const [brand, brandProducts] = await Promise.all([
+    Brand.findById(req.params.id).exec(),
+    Product.find({ brand: req.params.id }, "name").exec(),
+  ]);
 
   if (brand === null) {
     res.redirect("/home/brands");
@@ -122,5 +125,26 @@ exports.brand_delete_get = asyncHandler(async (req, res, next) => {
   res.render("brand_delete", {
     title: "Delete Brand",
     brand: brand,
+    brand_products: brandProducts,
   });
+});
+
+exports.brand_delete_post = asyncHandler(async (req, res, next) => {
+  const [brand, brandProducts] = await Promise.all([
+    Brand.findById(req.params.id).exec(),
+    Product.find({ brand: req.params.id }, "name").exec(),
+  ]);
+
+  if (brandProducts.length > 0) {
+    res.render("brand_delete", {
+      title: "Delete Brand",
+      brand: brand,
+      brand_products: brandProducts,
+    });
+    console.log(brandProducts);
+    return;
+  } else {
+    await Brand.findByIdAndDelete(req.body.brandid);
+    res.redirect("/home/brands");
+  }
 });
