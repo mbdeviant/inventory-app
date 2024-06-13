@@ -2,11 +2,24 @@ extends layout
 
 block content
 
-    p Do you really want to delete this brand?
+    h1 #{title}: #{brand.name}
 
-    form(method='POST')
-        div.form-group
-            input#brandid.form-control(type='hidden', name='brandid', value=brand._id)
+    if brand_products.length 
+        p #[strong Delete the following products before attempting to delete this brand]
+        div(style='margin-left:20px;margin-top:20px')
+            h4 Products 
+            dl 
+                each product in brand_products 
+                    dt 
+                        a(href=product.url)  #{product.name}
+                    dd #{product.description}
+    
+    else 
+        p Do you really want to delete this Brand?
 
-        button.btn.btn-primary(type='submit') Delete 
-        a.btndelete(href=brand.url) Cancel
+        form(method='POST')
+            div.form-group
+                input#brandid.form-control(type='hidden', name='brandid', value=brand._id )
+            
+            button.btn.btn-primary(type='submit') Delete 
+            a.btndelete(href=brand.url) Cancel
