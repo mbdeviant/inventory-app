@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+
+    p Do you really want to delete this brand?
+
+    form(method='POST')
+        div.form-group
+            input#brandid.form-control(type='hidden', name='brandid', value=brand._id)
+
+        button.btn.btn-primary(type='submit') Delete 
+        a.btndelete(href=brand.url) Cancel
