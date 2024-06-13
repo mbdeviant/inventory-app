@@ -81,3 +81,33 @@ exports.brand_update_get = asyncHandler(async (req, res, next) => {
     brand: brand,
   });
 });
+
+exports.brand_update_post = [
+  body("name", "Brand must contain at least 2 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const brand = new Brand({ name: req.body.name, _id: req.params.id });
+
+    if (!errors.isEmpty()) {
+      res.render("brand_form", {
+        title: "Add new Brand",
+        brand: brand,
+        errors: errors.array(),
+      });
+
+      return;
+    } else {
+      const updatedBrand = await Brand.findByIdAndUpdate(
+        req.params.id,
+        brand,
+        {}
+      );
+      res.redirect(updatedBrand.url);
+    }
+  }),
+];
