@@ -19,6 +19,7 @@ router.get("/products", product_controller.product_list);
 
 // Brand controllers
 router.get("/brand/:id/update", brand_controller.brand_update_get);
+router.post("/brand/:id/update", brand_controller.brand_update_post);
 router.get("/brand/create", brand_controller.brand_create_get);
 router.post("/brand/create", brand_controller.brand_create_post);
 router.get("/brand/:id", brand_controller.brand_detail);
