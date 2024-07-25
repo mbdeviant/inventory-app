@@ -3,7 +3,7 @@ body {
   color: #cccccc;
 
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 1.2em "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #ebeb06;
@@ -12,6 +12,7 @@ a {
   margin-left: 21px;
 }
 .sidebar-nav {
+  font-size: 0.9em;
   margin-top: 20px;
   padding: 0;
   list-style: none;
