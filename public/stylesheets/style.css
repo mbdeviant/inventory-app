@@ -12,7 +12,8 @@ a {
 .btndelete {
   margin-left: 21px;
 }
-#productform {
+#productform,
+#name {
   width: 70%;
 }
 .sidebar-nav {
