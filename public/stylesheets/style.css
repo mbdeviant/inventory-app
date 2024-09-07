@@ -8,8 +8,12 @@ body {
 a {
   color: #ebeb06;
 }
+
 .btndelete {
   margin-left: 21px;
+}
+#productform {
+  width: 70%;
 }
 .sidebar-nav {
   font-size: 0.9em;
