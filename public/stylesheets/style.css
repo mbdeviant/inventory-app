@@ -1,12 +1,55 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   background-color: #0f1518;
   color: #cccccc;
-
   padding: 50px;
+  padding-bottom: 0;
   font: 1.2em "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.container-fluid {
+  flex: 1;
 }
 a {
   color: #ebeb06;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  padding-top: 4px;
+  gap: 4px;
+  background-color: transparent;
+  color: white;
+  font-family: monospace;
+  font-style: italic;
+  user-select: none;
+  z-index: 1;
+}
+footer a {
+  text-decoration: none;
+  color: rgba(128, 128, 128, 0.582);
+  font-size: 0.8em;
+}
+footer a:hover {
+  color: rgba(128, 128, 128, 0.582);
+  text-decoration: none;
+}
+footer p {
+  padding: 0;
+  margin: 0;
 }
 
 .btndelete {
