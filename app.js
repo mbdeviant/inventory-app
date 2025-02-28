@@ -35,7 +35,7 @@ async function main() {
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
