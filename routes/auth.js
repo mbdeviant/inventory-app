@@ -7,6 +7,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { password } = req.body;
+  console.log(req.body, password);
   const adminPassword = process.env.ADMIN_PASSWORD;
 
   if (password === adminPassword) {
