@@ -11,7 +11,6 @@ router.post("/login", (req, res) => {
 
   if (password === adminPassword) {
     req.session.isAdmin = true;
-    console.log("Logged in successfully");
     return res.redirect("/");
   }
 
