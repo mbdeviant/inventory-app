@@ -1,0 +1,11 @@
+extends layout 
+
+block content 
+  div(class="login-container")
+    if error
+      p.error-message #{error}
+    form(method="post" action="/login" class="login-form")
+      label(for="password") Login as an admin to delete:
+      input(type="password" placeholder="Password" name="password" required class="login-input")
+      button(type="submit" class="login-btn") Login
+    a.btn(href="/home") Cancel
