@@ -6,6 +6,7 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -32,7 +33,14 @@ app.use(
     secret: process.env.SESSION_SECRET || "default",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      collectionName: "sessions",
+      ttl: 14 * 24 * 60 * 60, // 14 days
+    }),
+    cookie: {
+      secure: true,
+    },
   })
 );
 
