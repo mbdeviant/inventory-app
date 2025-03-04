@@ -11,9 +11,11 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const homeRouter = require("./routes/home");
 const authRouter = require("./routes/auth");
+const job = require("./cron");
 require("dotenv").config();
 
 var app = express();
+job.start();
 
 app.use(
   session({
