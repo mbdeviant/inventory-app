@@ -17,7 +17,7 @@ const job = require("./cron");
 require("dotenv").config();
 
 var app = express();
-// job.start();
+job.start();
 
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
