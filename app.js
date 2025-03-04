@@ -36,10 +36,13 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
       collectionName: "sessions",
-      ttl: 14 * 24 * 60 * 60, // 14 days
+      ttl: 60 * 60 * 24,
+      autoRemove: "interval",
+      autoRemoveInterval: 60, //
     }),
     cookie: {
       secure: true,
+      maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
