@@ -11,11 +11,21 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const homeRouter = require("./routes/home");
 const authRouter = require("./routes/auth");
+const rateLimit = require("express-rate-limit");
 const job = require("./cron");
 require("dotenv").config();
 
 var app = express();
 job.start();
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 150,
+  message:
+    "Too many requests from this IP, please try again after five minutes",
+});
+
+app.use(limiter);
 
 app.use(
   session({
