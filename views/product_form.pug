@@ -6,7 +6,7 @@ block content
     form#productform(method='POST' )
         div.form-group
             label(for='name') Name: 
-            input#name.form-control(type='text', placeholder='Name or model of the product', name='name', required value=(undefined===product? '' : product.name))
+            input#name.form-control(type='text', placeholder='Name of the product', name='name', required value=(undefined===product? '' : product.name))
         div.form-group
             label(for='description') Description: 
             textarea#description.form-control(placeholder='Product description' name='description' required)= undefined===product ? '' : product.description
